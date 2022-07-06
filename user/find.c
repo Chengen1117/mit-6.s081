@@ -59,7 +59,7 @@ find(char *path,char *target){
     while(read(fd, &de, sizeof(de)) == sizeof(de)){
       //printf("path %s\n",path);
       //printf("%s!\n",de.name);
-      if(de.inum == 0||de.inum==1)
+      if(de.inum == 0)
         continue;
       if(strcmp(de.name,".")==0||strcmp(de.name,"..")==0)
         continue;
