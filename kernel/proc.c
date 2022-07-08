@@ -274,7 +274,7 @@ fork(void)
     return -1;
   }
   np->sz = p->sz;
-
+  
   np->parent = p;
 
   // copy saved user registers.
@@ -290,6 +290,9 @@ fork(void)
   np->cwd = idup(p->cwd);
 
   safestrcpy(np->name, p->name, sizeof(p->name));
+  //lab2 trace
+  //copy mask
+  np->mask=p->mask;
 
   pid = np->pid;
 
@@ -693,3 +696,18 @@ procdump(void)
     printf("\n");
   }
 }
+
+int
+nproc(void){
+  int cnt=0;
+  struct proc *p;
+  for(p = proc; p < &proc[NPROC]; p++){
+    if(p->state!=UNUSED){
+      cnt+=1;
+    }
+  }
+  //printf("nproc: %d\n",cnt);
+  return cnt;
+
+}
+
